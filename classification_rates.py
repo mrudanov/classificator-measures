@@ -1,6 +1,6 @@
-import pandas
+from pandas import read_csv
 import numpy as np
-import itertools
+from itertools import product
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import cohen_kappa_score
@@ -12,7 +12,6 @@ DATAFILE = "classes.csv"
 
 def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.get_cmap('coolwarm')):
     plt.figure()
-    print(cm)
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title, fontsize=18)
     plt.colorbar()
@@ -39,7 +38,7 @@ def create_confusion_matrix(true, predicted, class_number):
 
 def transform_matrix_single_class(cm):
     transformed = [[0, 0], [0, 0]]
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+    for i, j in product(range(cm.shape[0]), range(cm.shape[1])):
         transformed[i][j] = cm[1 - i, 1 - j]
     return np.array(transformed)
 
@@ -48,7 +47,7 @@ def split_confusion_matrix(cm):
     return cm[0][0], cm[1][1], cm[0][1], cm[1][0]
 
 
-data_array = pandas.read_csv(DATAFILE)
+data_array = read_csv(DATAFILE)
 y_predicted = np.array(data_array['predicted'])
 y_true = np.array(data_array['label'])
 
