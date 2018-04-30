@@ -20,7 +20,7 @@ def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.get_cm
     plt.yticks(tick_marks, classes, fontsize=17)
     fmt = 'd'
     thresh = cm.max() / 2.
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+    for i, j in product(range(cm.shape[0]), range(cm.shape[1])):
         plt.text(j, i, format(cm[i, j], fmt),
                  horizontalalignment="center",
                  color="white" if cm[i, j] > thresh else "black", fontsize=18)
